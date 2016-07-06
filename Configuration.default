@@ -1,0 +1,150 @@
+emboss_server=bhmgiem01.jax.org
+#
+# Webservice Soaplab2 setting
+#
+soaplab2_tempfiles_dir=/data/services/soaplab2/_R_
+soaplab2_build_dir=/data/services/soaplab2
+soaplab2_logs_dir=/usr/local/tomcat/logs
+soaplab2_deploy_dir=/usr/local/tomcat/soaplab2
+
+#
+# emboss datasets global configuration 
+#
+#
+# where to read original ftp data - mapped on hobbiton
+remotedatadir=/mgi-data
+# where to process data locally on bhmgiem01 
+localdatadir=/data
+current_mouse=GRCm38
+#
+#Base directory for datasets - every dataset is a subdirectory
+#
+dbdir=$localdatadir/databases
+#
+#Base directory for runs logs 
+#
+logdir=$dbdir/dbilogs
+
+#Scripts directories
+#
+dbscriptdir=$dbdir/dbscripts
+
+scripts_base=$dbdir/mgiemboss
+scriptdir=$scripts_base/bin
+
+#swissprot update main script
+sprotUpdateScript=$scriptdir/updateSprot.sh
+#trembl update main script
+tremblUpdateScript=$scriptdir/updateTrEMBL.sh
+#genbank update main script
+tremblUpdateScript=$scriptdir/updateGenbank.sh
+
+#script to filter tagetted taxonomies
+filtertrembl=$scriptdir/misc/filterTrembl.py
+#script to re format sequence header line
+format_header=$scriptdir/misc/formatFastaHeader.pl
+#script to unzip genbank files
+zcatGBScript=$scriptdir/misc/zcatGB.sh
+#script to test genbank update
+genbankDiffs=$scriptdir/misc/genbankDiffs.sh
+#script to test refSeq update
+refSeqDiffs=$scriptdir/misc/refseqDiffs.sh
+#script to unzip genbank files
+zcatRefSeqScript=$scriptdir/misc/zcatRefseq.sh
+
+#path to zcat 
+zcatprog=/usr/bin/zcat
+#path to zgrep
+zgrep=/usr/bin/zgrep
+
+#perl path
+perlpath=/usr/bin/perl
+
+#path to dbiflat program 
+dbflat=/usr/local/bin/dbiflat
+dbxlat=/usr/local/bin/dbxflat
+
+#path to dbifasta program
+dbfasta=/usr/local/bin/dbifasta
+
+#path to taxonomy list used to filter trembl dataset
+taxonfile=$dbdir/taxonomy.txt
+
+#documentation : http://emboss.sourceforge.net/apps/cvs/emboss/apps/dbiflat.html
+#path to emboss config file
+
+embossconfig=/usr/local/emboss/share/EMBOSS/emboss.default
+moddate_prefix=moddate
+updateConfigScript=$scriptdir/misc/updateEmbossConfig.pl
+#
+######################### Datasets specific configs #########################
+#
+#
+# No need to store the release id variable since we 
+# take advantage of uniprot release id format (year-month) 
+# we capture the date of the last download into a flag - we compare
+# and update this as needed 
+#
+#
+#Uniprot -Swissport
+#
+# configuration specific to file split program
+sprot_startBlock=ID
+sprot_endblock=//
+sprot_chunkSize=1610612736
+
+# Configuration specific to ftp directory
+sprot_sourcedir=$remotedatadir/uniprot/swissprot
+sprot_sourcefilename=uniprot_sprot.dat.gz
+
+# configuration specific to emboss tool
+sprot_embossdbtype=P
+sprot_embossdb=sprot
+sprot_fileSufix=flat
+sprot_filePrefix=$sprot_embossdb
+sprot_embossdbdir=$dbdir/$sprot_embossdb
+sprot_embossdbindexdir=$sprot_embossdbdir/sprotIdx
+sprot_embossfile=$sprot_filePrefix*.$sprot_fileSufix
+sprot_embossmethod=emblcd
+sprot_embossfileformat=swiss
+sprot_embossfields=""
+sprot_embosscomment="Swiss Prot w/ EMBL index"
+
+####
+#
+#Uniprot - Trembl
+# Weekly mirror_wget cron (Sat @ 5:00 PM).
+#
+#0 17 * * 6 /usr/local/mgi/live/mirror_wget/weeklycron.csh; /usr/local/mgi/live/mirror_wget/check_mirror_logs.csh
+#Is The cron that downloads uniprot_trembl.dat.gz file on hobbiton. THE script runs
+# on mgi-prodapp2 
+#  
+# configuration specific to file split program
+trembl_startBlock=ID
+trembl_endblock=//
+# Chunks of 2.5GB
+#trembl_chunkSize=2684354560
+trembl_chunkSize=1610612736
+
+# Configuration specific to ftp directory
+trembl_sourcedir=$remotedatadir/uniprot/trembl
+trembl_sourcefilename=uniprot_trembl.dat.gz
+
+# configuration specific to emboss tool
+trembl_embossdbtype=P
+trembl_embossdb=trembl
+tr_embossdb=tr
+trembl_fileSufix=flat
+trembl_filePrefix=$tr_embossdb
+trembl_embossdbdir=$dbdir/$trembl_embossdb
+trembl_embossdbindexdir=$trembl_embossdbdir/trIdx
+trembl_embossfile=$trembl_filePrefix*.$trembl_fileSufix
+trembl_embossmethod=emblcd
+trembl_embossfileformat=swiss
+trembl_embossfields=""
+trembl_embosscomment="TrEMBL w/ EMBL index,release"
+
+#RefSeq 
+#
+refseq_release_file=$remotedatadir/refseq/release/RELEASE_NUMBER
+
