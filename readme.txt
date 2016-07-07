@@ -37,8 +37,8 @@ CRONS: All these crons run on jenkins (bhmgiem01.jax.org:1080)
 #Weekly and monthly crons
 #
 1.indexGenbank.sh      - to run genbank Release
-2.updateTrembl.sh      - to run Trembl update
-3.updateSprot.sh       - to run Swissprot update
+2.indexTrembl.sh      - to run Trembl update
+3.indexSprot.sh       - to run Swissprot update
 4.indexRefseq.sh       - to run Refseq Release
 #On demand
 5.indexVegaMus_prot.sh - to run Vega protein 
