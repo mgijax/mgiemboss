@@ -1,0 +1,16 @@
+#!/bin/sh
+
+WK_DIR=`pwd`
+
+CONFIGURATION_DEFAULT=${WK_DIR}/Configuration.default
+CONFIGURATION=${WK_DIR}/Configuration
+
+if [ ! -f $CONFIGURATION_DEFAULT ]
+then
+   echo "Missing Configuration file: $CONFIGURATION_DEFAULT" 
+fi
+
+cp $CONFIGURATION_DEFAULT $CONFIGURATION
+echo "$CONFIGURATION generated"
+
+exit 0
