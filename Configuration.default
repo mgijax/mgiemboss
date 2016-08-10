@@ -27,17 +27,8 @@ logdir=$dbdir/dbilogs
 
 #Scripts directories
 #
-dbscriptdir=$dbdir/dbscripts
-
 scripts_base=$dbdir/mgiemboss
 scriptdir=$scripts_base/bin
-
-#swissprot update main script
-sprotUpdateScript=$scriptdir/updateSprot.sh
-#trembl update main script
-tremblUpdateScript=$scriptdir/updateTrEMBL.sh
-#genbank update main script
-tremblUpdateScript=$scriptdir/updateGenbank.sh
 
 #script to filter tagetted taxonomies
 filtertrembl=$scriptdir/misc/filterTrembl.py
