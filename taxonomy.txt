@@ -1,0 +1,10 @@
+mouse=10090
+human=9606
+chimpanzee=9598
+rhesus macaque=9544
+dog=9615
+cattle=9913
+rat=10116
+western clawed frog=8364
+zebrafish=7955
+chicken=9031
