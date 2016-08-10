@@ -96,7 +96,6 @@ echo "scriptdir=$scriptdir" | tee -a ${LOG}
 echo "------------------------" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
 date | tee -a ${LOG}
-exit 0
 $updateScript
 #
 #To Do
