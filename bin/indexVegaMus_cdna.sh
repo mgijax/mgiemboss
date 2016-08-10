@@ -12,7 +12,7 @@
 cd `dirname $0`; . ../Configuration
 
 updateScript=$scriptdir/processSanger.sh
-target_release=64
+target_release=65
 
 # Configuration specific to source
 current_mouse="VEGA$target_release"
