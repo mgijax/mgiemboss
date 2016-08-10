@@ -7,9 +7,9 @@
 #
 cd `dirname $0`; . ../Configuration
 
-splitScript=$scriptdir/split_uniprotFile.awk
+splitScript=$scriptdir/misc/split_uniprotFile.awk
 updateScript=$scriptdir/processUniprotdb.sh
-updateConfigScript=$scriptdir/updateEmbossConfig.pl
+updateConfigScript=$scriptdir/misc/updateEmbossConfig.pl
 
 embossdbdir=$trembl_embossdbdir
 temp_dir=$embossdbdir/temp
