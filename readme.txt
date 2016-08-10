@@ -13,7 +13,7 @@
 This product stores all the scripts and configuration
 files needed to index Sequence datasets into EMBOSS 
 
-The product mgiemboss should be installed on the emboss server
+The product mgiemboss should be installed on the emboss server(mgiprodemboss)
 under /data/databases/
 
 Before running the update/index script for a given sequence dataset,
@@ -24,7 +24,7 @@ check the following first:
    Configuration/update script 
 If any of the above has changed, update the Configuration/update scripts as needed  
 
-*The updates main configuration file is Configutation
+*The main configuration file is Configutation
 *Scripts  to run specific updates are stored under bin/
 *taxonomy file - used by updateTrembl.sh  to only index
   sequences of organisms included in the taxonomy file
@@ -36,15 +36,15 @@ CRONS: All these crons run on jenkins (bhmgiem01.jax.org:1080)
 
 #Weekly and monthly crons
 #
-1.indexGenbank.sh      - to run genbank Release
-2.indexTrembl.sh      - to run Trembl update
-3.indexSprot.sh       - to run Swissprot update
-4.indexRefseq.sh       - to run Refseq Release
+1.indexGenbank.sh          - to run genbank Release
+2.indexTrembl.sh           - to run Trembl update
+3.indexSprot.sh            - to run Swissprot update
+4.indexRefseq.sh           - to run Refseq Release
 #On demand
-5.indexVegaMus_prot.sh - to run Vega protein 
-6.indexVegaMus_cdna.sh - to run Vega cdna
-7.indexEnsemblMus_cdna.sh
-8.indexEnsemblMus_prot.sh
+5.indexVegaMus_prot.sh     - to run Vega protein 
+6.indexVegaMus_cdna.sh     - to run Vega cdna and ncrna
+7.indexEnsemblMus_cdna.sh  - to run Ensembl cdna and ncrna
+8.indexEnsemblMus_prot.sh  - to run Ensembl protein
 
 Documentation:
 http://mgiwiki/mediawiki/index.php/sw:Emboss
@@ -59,8 +59,6 @@ TR11703 - Move Emboss from hygelac.jax.org to MGI server
 TR11824 - Some Uniprot TREMBL Sequences missing in Emboss
 TR11918 - Broken FASTA links
 
-EMBOSS updates are scheduled on the production instance of Jenkins
-CRONS: All these crons run on jenkins (bhmgiem01.jax.org:1080)
 
 
 
