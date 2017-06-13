@@ -24,8 +24,8 @@ under /data/databases/
 - [Prerequisites](#prerequisites)
 - [Documentation](#documentation)
 - [Configuration](#configuration)
-- [Related TRs](#relatedtrs)
-- [Disk Space](#space)
+- [Related TRs](#related-trs)
+- [Disk Space](#disk-space-usage)
 
 ## Prerequisites 
 Before running an index script for a given sequence dataset, check the following first:
