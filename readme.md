@@ -20,7 +20,15 @@ This product stores all the scripts and configuration files needed to index Sequ
 The product mgiemboss should be installed on the emboss server(mgiprodemboss)
 under /data/databases/
 
-## Before running an index script for a given sequence dataset, check the following first:
+## Content
+- [Prerequisites](#prerequisites)
+- [Documentation](#documentation)
+- [Configuration](#configuration)
+- [Related TR](#related)
+- [Disk Space](#space)
+
+## Prerequisites 
+Before running an index script for a given sequence dataset, check the following first:
 
  1. The path to the sequence data is as defined in the dataset configuration file
  2. The individual sequence file name format is as defined in the dataset Configuration file
@@ -33,24 +41,27 @@ If any of the above has changed, update the Configuration/update scripts as need
 *taxonomy file - used by updateTrembl.sh  to only index
   sequences of organisms included in the taxonomy file
   this file was used to filter Trembl dataset -
-# 
-#Main scripts to run specific updates
+
+## Documentation:
+http://mgiwiki/mediawiki/index.php/sw:Emboss
+
+## Configuration 
+
 EMBOSS updates are scheduled on the production instance of Jenkins
 CRONS: All these crons run on jenkins (bhmgiem01.jax.org:1080)
 
-## Weekly and monthly crons
+### Weekly and monthly crons
 1. indexGenbank.sh          - to run genbank Release
 2. indexTrembl.sh           - to run Trembl update
 3. indexSprot.sh            - to run Swissprot update
 4.i ndexRefseq.sh           - to run Refseq Release
+
 ### On demand
 5. indexVegaMus_prot.sh     - to run Vega protein 
 6. indexVegaMus_cdna.sh     - to run Vega cdna and ncrna
 7. indexEnsemblMus_cdna.sh  - to run Ensembl cdna and ncrna
 8. indexEnsemblMus_prot.sh  - to run Ensembl protein
 
-## Documentation:
-http://mgiwiki/mediawiki/index.php/sw:Emboss
 
 ## Related TRs:
 * TR9685  - Update Seqfetch to access EMBOSS server
@@ -62,6 +73,6 @@ http://mgiwiki/mediawiki/index.php/sw:Emboss
 * TR11824 - Some Uniprot TREMBL Sequences missing in Emboss
 * TR11918 - Broken FASTA links
 
-## Server Space Maintenance 
+## Disk Space Usage
 
 
