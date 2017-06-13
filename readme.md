@@ -51,12 +51,14 @@ EMBOSS updates are scheduled on the production instance of Jenkins
 CRONS: All these crons run on jenkins (bhmgiem01.jax.org:1080)
 
 ### Weekly and monthly crons
+
 1. indexGenbank.sh          - to run genbank Release
 2. indexTrembl.sh           - to run Trembl update
 3. indexSprot.sh            - to run Swissprot update
-4.i ndexRefseq.sh           - to run Refseq Release
+4. indexRefseq.sh           - to run Refseq Release
 
 ### On demand
+
 5. indexVegaMus_prot.sh     - to run Vega protein 
 6. indexVegaMus_cdna.sh     - to run Vega cdna and ncrna
 7. indexEnsemblMus_cdna.sh  - to run Ensembl cdna and ncrna
