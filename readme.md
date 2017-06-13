@@ -5,23 +5,20 @@
  
   Author :lnh - 04/2015
   
- #####################################
-
+#####################################
+#
 # emboss admin doc : http://emboss.sourceforge.net/docs/adminguide/node19.html
 # dbxflat doc: http://emboss.sourceforge.net/apps/cvs/emboss/apps/dbxflat.html
 #
 # MGI EMBOSS server: bhmgiem01.jax.org
 # Server alias : mgiprodemboss.jax.org
 #
-#
 ```
 This product stores all the scripts and configuration files needed to index Sequence datasets into EMBOSS 
 
-The product mgiemboss should be installed on the emboss server(mgiprodemboss)
-under /data/databases/
-
 ## Content
 - [Prerequisites](#prerequisites)
+- [Installing](#installing)
 - [Documentation](#documentation)
 - [Configuration](#configuration)
 - [Related TRs](#related-trs)
@@ -41,6 +38,10 @@ If any of the above has changed, update the Configuration/update scripts as need
 *taxonomy file - used by updateTrembl.sh  to only index
   sequences of organisms included in the taxonomy file
   this file was used to filter Trembl dataset -
+
+## Installing
+The product mgiemboss should be installed on the emboss server(mgiprodemboss)
+under /data/databases/
 
 ## Documentation:
 http://mgiwiki/mediawiki/index.php/sw:Emboss
