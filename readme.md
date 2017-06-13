@@ -16,7 +16,7 @@
 ```
 This product stores all the scripts and configuration files needed to index Sequence datasets into EMBOSS 
 
-## Content
+## Contents
 - [Prerequisites](#prerequisites)
 - [Installing](#installing)
 - [Documentation](#documentation)
