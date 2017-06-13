@@ -31,14 +31,40 @@ Before running an index script for a given sequence dataset, check the following
  2. The individual sequence file name format is as defined in the dataset Configuration file
  3. Access/pathto Dataset realease version if applicable is as defined in the Configuration/update script 
    
-If any of the above has changed, update the Configuration/update scripts as needed  
+If any of the above has changed, update the Configuration/update scripts as needed. 
 
-* The main configuration file is Configutation
-* Scripts  to run specific updates are stored under bin/
-*taxonomy file - used by updateTrembl.sh  to only index
-  sequences of organisms included in the taxonomy file
-  this file was used to filter Trembl dataset -
+### Directories and files
 
+ * mgiemboss/Configuration.default  -- main configuration file for emboss datasets global configuration
+ * mgiemboss/taxonomy.txt - used by updateTrembl.sh  to only index sequences of organisms included in the taxonomy file
+  this file was used to filter Trembl dataset - not needed anymore since Trembl reduced their dataset
+ * mgiemboss/Install   
+ * mgiemboss/bin/      -- stores scripts  to run specific updates 
+ ```bash
+    cleanSoaplabTempfiles.sh  
+    
+    configRefSeq_prot.sh	  
+    configRefSeq_rna.sh	  
+    
+    indexRefSeq.sh		
+    indexGenbank.sh	
+    
+    indexSprot.sh	
+    indexTrEMBL.sh
+   
+    indexVegaMus_cdna.sh
+    indexVegaMus_prot.sh
+    
+    indexEnsemblMus_cdna.sh
+    indexEnsemblMus_prot.sh
+    
+   processGenbank.sh
+   processRefSeq.sh
+   processSanger.sh
+   processUniprotdb.sh
+```
+ * mgiemboss/misc 
+ 
 ## Installing
 The product mgiemboss should be installed on the emboss server(mgiprodemboss)
 under /data/databases/
