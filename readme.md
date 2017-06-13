@@ -78,4 +78,7 @@ CRONS: All these crons run on jenkins (bhmgiem01.jax.org:1080)
 
 ## Disk Space Usage
 
+The server tends to run out of space quite often due to the size of some datasets - While waiting to implement 
+a different solution, It's advisable to clean old files and indexes after a successful run.
+
 
