@@ -24,7 +24,7 @@ under /data/databases/
 - [Prerequisites](#prerequisites)
 - [Documentation](#documentation)
 - [Configuration](#configuration)
-- [Related TRs](#related trs)
+- [Related TRs](#related)
 - [Disk Space](#space)
 
 ## Prerequisites 
