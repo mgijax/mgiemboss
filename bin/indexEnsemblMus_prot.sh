@@ -12,7 +12,7 @@
 cd `dirname $0`; . ../Configuration
 
 updateScript=$scriptdir/processSanger.sh
-target_release=85
+target_release=86
 
 # Configuration specific to source
 embossdb=ensembl_mus_prot
