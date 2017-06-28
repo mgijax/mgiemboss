@@ -13,27 +13,32 @@
 datadir=$sourcedir
 destination=$temp_dir
 
+
 if [ ! -d $destination ]
 then
     echo "Creating $destination"
     mkdir  $destination
-else
-    echo "Removing temp files"
-    if ! find $destination -maxdepth 0 -empty | read
-    then
-      rm $destination/*
-    fi
 fi
 
 echo "start: " `date`
 echo "Data directory: " $datadir
 echo "Destination directory: " $destination
-echo "The file prefix: " $filePrefix
 
 cd $datadir
+echo "File Count in $datadir:"
+ls -l *.gz | wc -l
 
-for file in `ls $filePrefix*.gz |sed s/.gz//`
+for file_group in $REMOTE_FILES
 do
+   echo "File count for $file_group:"
+   ls -l $file_group*.seq.gz | wc -l
+   echo "Removing temp files"
+   if ! find $destination -maxdepth 0 -empty | read
+   then
+      rm $destination/$file_group*.seq
+   fi
+   for file in `ls -f $file_group*.seq.gz |sed s/.gz//`
+   do
 	if [ -f $destination/$file ] 
 	then
 		echo "already expanded:" $file
@@ -44,6 +49,7 @@ do
 		$zcatprog ${file}.gz  | sed -e '/^PROJECT/d' | sed -e '/^DBLINK/d' > $destination/${file}
 	fi
 
+    done
 done
 
 echo 'File Count:'
