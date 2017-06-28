@@ -35,6 +35,9 @@ last_updatefile=${LOG_DIR}/$logfile
 filterScript=$filtertrembl
 isTrembl=1
 
+#Clean the logs 
+#
+rm -f $LOG_DIR/$dblogfile
 LOG=${LOG_DIR}/${SCRIPT_NAME}.log
 rm -f ${LOG}
 touch ${LOG}
@@ -61,7 +64,11 @@ fi
 # 1) restore flatfiles
 # 2) restore indexes.
 #
-cat $LOG_DIR/$dblogfile | tee -a ${LOG}
+if [ -f $LOG_DIR/$dblogfile ]
+then
+   cat $LOG_DIR/$dblogfile | tee -a ${LOG}
+fi
+
 echo "${SCRIPT_NAME} completed successfully " | tee -a ${LOG}
 date | tee -a ${LOG}
 
