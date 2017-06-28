@@ -18,6 +18,7 @@ refseq_embossfileformat=GB
 release_file=$refseq_release_file
 
 updateScript=$refseq_update_script
+REMOTE_FILES="protein.gpff"
 
 #where the flatfiles and indexes are located on the EMBOSS server
 embossdbdir=$refseq_dbbasedir
@@ -30,7 +31,7 @@ old_indexdir=$embossdbindexdir/old
 
 export is_rna updateConfigScript flatfiles_dir 
 export embossdbdir temp_dir old_dir embossdbindexdir temp_indexdir
-export old_indexdir release_file
+export old_indexdir release_file REMOTE_FILES
 
 #Where to get the files on hobbiton 
 sourcedir=$refseq_sourcedir

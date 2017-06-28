@@ -8,25 +8,21 @@
 cd `dirname $0`; . ../Configuration
 is_rna=1
 
-refseq_sourcedir=$remotedatadir/refseq/complete
-refseq_filePrefix=complete
-refseq_dbbasedir=$dbdir/refseq
-refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
 refseq_update_script=$scriptdir/processRefSeq.sh
 refseq_embossfileformat=GB
-
 release_file=$refseq_release_file
-
 updateScript=$refseq_update_script
 
 #where the flatfiles and indexes are located on the EMBOSS server
-embossdbdir=$dbdir/refseq
-flatfiles_dir=$embossdbdir/flatfiles
+embossdbdir=$refseq_dbbasedir
+flatfiles_dir=$refseq_flatfiles_basedir
 temp_dir=$embossdbdir/temp
 old_dir=$embossdbdir/flatfiles.old
 embossdbindexdir=$embossdbdir/refseqRnaIdx
 temp_indexdir=$embossdbindexdir/tempIdx
 old_indexdir=$embossdbindexdir/old
+REMOTE_FILES="rna.gbff
+genomic.gbff"
 
 export is_rna updateConfigScript flatfiles_dir 
 export embossdbdir temp_dir old_dir embossdbindexdir temp_indexdir
@@ -37,16 +33,12 @@ sourcedir=$refseq_sourcedir
 
 # configuration specific to emboss tool
 embossdb=refseqRna
-filePrefix=$refseq_filePrefix
-fileSufix=rna.gbff
-embossfile=$filePrefix*.$fileSufix
+embossfile="$refseq_filePrefix*.gbff"
 embossfileformat=$refseq_embossfileformat
 
 db_basedir=$embossdbdir
 
-export sourcedir embossdb embossfile filePrefix fileSufix
-export embossfileformat db_basedir
-
+export sourcedir embossdb embossfile embossfileformat 
 SCRIPT_NAME=`basename $0`
 dblogfile=$embossdb.log
 LOG_DIR=$logdir
@@ -75,8 +67,6 @@ echo "sourcedir=$sourcedir" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
 echo "embossdb=$embossdb" | tee -a ${LOG}
 echo "embossfile=$embossfile" | tee -a ${LOG}
-echo "filePrefix=$filePrefix" | tee -a ${LOG}
-echo "fileSufix=$fileSufix" | tee -a ${LOG}
 echo "db_basedir=$db_basedir" | tee -a ${LOG}
 echo "embossfileformat=$embossfileformat" | tee -a ${LOG}
 echo "embossconfig=$embossconfig" | tee -a ${LOG}
@@ -84,7 +74,7 @@ echo "" | tee -a ${LOG}
 
 export LOG last_updatefile LOG_DIR dblogfile
 export perlpath dbflat dbfasta embossconfig 
-export scriptdir
+export scriptdir REMOTE_FILES
 
 echo "LOG=$LOG" | tee -a ${LOG}
 echo "last_updatefile=$last_updatefile" | tee -a ${LOG}
