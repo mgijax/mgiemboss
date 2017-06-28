@@ -62,11 +62,11 @@ else
 fi
 
 #save current index
-if [ ! -d $embossdbindexdir/old ]
+if [ ! -d $old_indexdir ]
 then
-   mkdir  $embossdbindexdir/old
+   mkdir  $old_indexdir
 else
-   rm -f $embossdbindexdir/old/*
+   rm -f $old_indexdir/*
 fi
 
 if [ ! -d $temp_indexdir ]
@@ -78,8 +78,8 @@ fi
 
 #Save old indexes and data
 mv $embossdbdir/$embossfile $old_dir
-mv $embossdbindexdir/*.* $embossdbindexdir/old/
-# Move new data files from temp to dataset file base
+mv $embossdbindexdir/*.* $old_indexdir/
+#Move new data files from temp to dataset file base
 #
 mv $temp_dir/$embossfile $embossdbdir/
 
