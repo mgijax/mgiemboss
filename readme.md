@@ -36,7 +36,7 @@ If any of the above has changed, update the Configuration/update scripts as need
 ### Directories and files
 
  * mgiemboss/Configuration.default  -- main configuration file for emboss datasets global configuration
- * mgiemboss/taxonomy.txt - used by updateTrembl.sh  to only index sequences of organisms included in the taxonomy file
+ * mgiemboss/taxonomy.txt - used by indexTrembl.sh  to only index sequences of organisms included in the taxonomy file
   this file was used to filter Trembl dataset - not needed anymore since Trembl reduced their dataset
  * mgiemboss/Install   
  * mgiemboss/bin/      -- stores scripts  to run specific updates 
