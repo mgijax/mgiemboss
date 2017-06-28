@@ -76,7 +76,7 @@ http://mgiwiki/mediawiki/index.php/sw:Emboss
 
 EMBOSS updates are scheduled on the production instance of Jenkins.
 
-* [http://bhmgiem01.jax.org:10080/job/EMBOSS-DATASETS-Update/ See EMBOSS Updates On Jenkins ]
+* See EMBOSS Updates On Jenkins: [http://bhmgiem01.jax.org:10080/job/EMBOSS-DATASETS-Update/]
 
 ### Weekly and monthly crons
 
