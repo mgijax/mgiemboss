@@ -30,16 +30,32 @@ genbank_embosscomment=" GenBank in native format with EMBL index"
 genbank_release_label="NCBI-GenBank Flat File Release"
 db_basedir=$dbdir/$embossdb
 
+#REMOTE_FILES="gbcon
+REMOTE_FILES="gbenv 
+gbest 
+gbgss 
+gbhtc 
+gbhtg 
+gbmam 
+gbpat 
+gbpri 
+gbrod 
+gbsts 
+gbsyn
+gbtsz
+gbuna
+gbvrt"
 
 #where the flatfiles are located
 embossdbdir=$dbdir/$embossdb/flatfiles
 flatfiles_dir=$embossdbdir
-temp_dir=$embossdbdir/temp
+temp_dir=$dbdir/$embossdb/temp
 
 sourcedir=$remotedatadir/ftp.ncbi.nih.gov/genbank
 sourcefilename=seq.gz
 dblogfile=$embossdb.log
-old_dir=$embossdbdir/old
+old_dir=$dbdir/$embossdb/flatfiles.old
+
 temp_indexdir=$embossdbindexdir/temp
 old_indexdir=$embossdbindexdir/old
 
@@ -78,13 +94,6 @@ echo "embossfileformat=$embossfileformat" | tee -a ${LOG}
 echo "embossconfig=$embossconfig" | tee -a ${LOG}
 echo "zgrepPath=$zgrep" | tee -a ${LOG}
 echo "======================" | tee -a ${LOG}
-#check if this is a Sunday 
-#if [ `date '+%u'` != "0" ] 
-#   then
-#        echo "Today is not an update day . It is day: " `date '+%u'` "of the week" | tee -a ${LOG}
-#        echo "Stop Time: `date`" | tee -a ${LOG}
-#        exit
-#fi
 #get the release number 
 echo "get the release number" | tee -a ${LOG} 
 release=""
@@ -115,11 +124,11 @@ then
 fi
 
 echo "Indexing genbank release number: $release"
-export LOG last_updatefile LOG_DIR embossdbindexdir embossfileformat
+export REMOTE_FILES LOG last_updatefile LOG_DIR embossdbindexdir embossfileformat
 export embossdb dblogfile fileSufix chunkSize filePrefix embossfile
 export perlpath sourcefilename sourcedir temp_file temp_dir old_dir embossdbdir
 export splitScript updateScript zcatprog dbflat embossconfig updateConfigScript
-export temp_indexdir release db_basedir scriptdir old_indexdir
+export flatfiles_dir temp_indexdir release db_basedir scriptdir old_indexdir
 
 date | tee -a ${LOG}
 echo "Copying files from hobbiton - Calling " $zcatGBScript | tee -a ${LOG}
@@ -136,7 +145,6 @@ $updateScript
 # 2) restore indexes.
 #
 
-exit 0
 date | tee -a ${LOG}
 echo "Checking if the run was successfully - Calling " $genbankDiffs | tee -a ${LOG}
 $genbankDiffs rna >& $logdir/genbankDiffs.sh.log
