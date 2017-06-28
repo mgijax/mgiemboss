@@ -30,7 +30,7 @@ logdir=$dbdir/dbilogs
 scripts_base=$dbdir/mgiemboss
 scriptdir=$scripts_base/bin
 
-#script to filter tagetted taxonomies
+#script to filter tageted taxonomies
 filtertrembl=$scriptdir/misc/filterTrembl.py
 #script to re format sequence header line
 format_header=$scriptdir/misc/formatFastaHeader.pl
@@ -45,18 +45,24 @@ zcatRefSeqScript=$scriptdir/misc/zcatRefseq.sh
 
 #path to zcat 
 zcatprog=/usr/bin/zcat
+#zcatprog=`which zcat`
 #path to zgrep
 zgrep=/usr/bin/zgrep
+#zgrep=` which zgrep`
 
 #perl path
 perlpath=/usr/bin/perl
+#perlpath=`which perl`
 
 #path to dbiflat program 
 dbflat=/usr/local/bin/dbiflat
+#dbflat=`which dbiflat`
 dbxlat=/usr/local/bin/dbxflat
+#dbxlat=`which dbxflat`
 
 #path to dbifasta program
 dbfasta=/usr/local/bin/dbifasta
+#dbfasta=`which dbifasta`
 
 #path to taxonomy list used to filter trembl dataset
 taxonfile=$dbdir/taxonomy.txt
@@ -137,5 +143,21 @@ trembl_embosscomment="TrEMBL w/ EMBL index,release"
 
 #RefSeq 
 #
-refseq_release_file=$remotedatadir/refseq/release/RELEASE_NUMBER
+refseq_release_file=$remotedatadir/refseq_test/release/RELEASE_NUMBER
+refseq_sourcedir=$remotedatadir/refseq_test/release/complete
+
+refseq_dbbasedir=$dbdir/refseq
+refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
+
+refseq_filePrefix=complete
+refseq_rna_fileSufix=.rna.gbff
+refseq_contig_fileSufix=.genomic.gbff
+refseq_protein_fileSufix=.protein.gbff
+
+refseq_rna_file_pattern="$refseq_filePrefix.*$refseq_rna_fileSufix"
+refseq_contig_file_pattern="$refseq_filePrefix.*$refseq_contig_fileSufix"
+refseq_protein_file_pattern="$refseq_filePrefix.*$refseq_protein_fileSufix"
+
+refseq_rna_file="$refseq_sourcedir/$refseq_rna_file_pattern $refseq_sourcedir/$refseq_contig_file_pattern"
+refseq_protein_file="$refseq_sourcedir/$refseq_protein_file_pattern"
 
