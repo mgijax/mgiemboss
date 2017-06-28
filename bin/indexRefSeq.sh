@@ -14,6 +14,9 @@ fi
 
 update_rna=$scriptdir/configRefSeq_rna.sh
 update_prot=$scriptdir/configRefSeq_prot.sh
+REMOTE_FILES="rna.gbff
+genomic.gbff
+protein.gpff"
 
 SCRIPT_NAME=`basename $0`
 LOG_DIR=$logdir
@@ -31,17 +34,18 @@ date | tee -a ${LOG}
 sourcedir=$refseq_sourcedir
 embossdbdir=$refseq_dbbasedir
 temp_dir=$embossdbdir/temp
-filePrefix=$refseq_filePrefix
 
 echo "" | tee -a ${LOG}
 echo "Global variables setting" | tee -a ${LOG}
 echo "------------------------" | tee -a ${LOG}
 echo "sourcedir=$sourcedir" | tee -a ${LOG}
-echo "filePrefix=$filePrefix" | tee -a ${LOG}
+echo "rna_file=$refseq_rna_file" | tee -a ${LOG}
+echo "protein_file=$refseq_protein_file" | tee -a ${LOG}
 echo "zcatprog=$zcatprog" | tee -a ${LOG}
 echo "temp_dir=$temp_dir" | tee -a ${LOG}
 
-export temp_dir sourcedir filePrefix zcatprog
+export temp_dir sourcedir zcatprog REMOTE_FILES
+export refseq_rna_file refseq_protein_file
 echo "------------------------" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
 
@@ -69,6 +73,7 @@ then
   echo "Program complete"
   exit
 fi
+echo "New release $release" |  tee -a ${LOG}
 echo "Calling " $zcatRefSeqScript | tee -a ${LOG}
 
 $zcatRefSeqScript | tee -a ${LOG}
