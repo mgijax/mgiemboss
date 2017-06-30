@@ -9,6 +9,7 @@
 #
 # emboss admin doc : http://emboss.sourceforge.net/docs/adminguide/node19.html
 # dbxflat doc: http://emboss.sourceforge.net/apps/cvs/emboss/apps/dbxflat.html
+# dbiflat doc: http://emboss.sourceforge.net/apps/cvs/emboss/apps/dbiflat.html
 #
 # MGI EMBOSS server: bhmgiem01.jax.org
 # Server alias : mgiprodemboss.jax.org
