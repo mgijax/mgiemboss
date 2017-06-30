@@ -54,7 +54,6 @@ fi
 #
 # set the release id
 #
-#release_number_file=$sourcedir/RELEASE_NUMBER
 if [ ! -f $release_file ]
 then
    echo "Dataset update failed - missing $release_file file"
@@ -67,9 +66,7 @@ then
   echo "Program complete"
   exit
 fi
-
 echo "Updating EMBOSS with $release release" |  tee -a ${LOG}
-
 #
 # set up dir structure 
 #
@@ -78,21 +75,22 @@ echo 'Setting up directory structure' | tee -a ${LOG}
 if [ ! -d $old_dir ]
 then
    mkdir  $old_dir
-else
-   rm -f $old_dir/$embossfile
-fi
-
-date | tee -a ${LOG}
-filecount=`ls $flatfiles_dir/ | grep $embossfile | wc -l`
-echo "Moving $filecount $flatfiles_dir/$embossfile to $old_dir" | tee -a ${LOG}
-if [ $filecount -gt 0 ]
-then
-   mv $flatfiles_dir/$embossfile $old_dir
 fi
 date | tee -a ${LOG}
-echo "Moving $temp_dir/$embossfile to $flatfiles_dir" | tee -a ${LOG}
-mv $temp_dir/$embossfile $flatfiles_dir/
-
+for file_group in $REMOTE_FILES
+do
+    filecount=`ls $flatfiles_dir/ | grep $file_group | wc -l`
+    if [ $filecount -gt 0 ]
+    then
+         echo "Moving $filecount $flatfiles_dir/*$file_group to $old_dir" | tee -a ${LOG}
+         rm -f $old_dir/*$file_group
+         echo "mv $flatfiles_dir/*$file_group $old_dir"
+         mv $flatfiles_dir/*$file_group $old_dir
+    fi
+    echo "Moving $temp_dir/*$file_group to $flatfiles_dir" | tee -a ${LOG}
+    mv $temp_dir/*$file_group $flatfiles_dir
+done
+date | tee -a ${LOG}
 #Now I need to generate indexes
 echo "Indexing $embossdb release $release" | tee -a $LOG
 echo "old_dir=$old_dir "| tee -a $LOG
@@ -102,7 +100,8 @@ echo "flatfiles_dir=$flatfiles_dir"| tee -a $LOG
 echo "embossdbindexdir=$embossdbindexdir"| tee -a $LOG
 echo "old_indexdir=$old_indexdir"| tee -a $LOG
 echo "temp_indexdir=$temp_indexdir"| tee -a $LOG
-#save current index
+#
+#set index directories
 if [ ! -d $embossdbindexdir ]
 then
    mkdir  $embossdbindexdir
@@ -124,7 +123,7 @@ fi
 
 date | tee -a ${LOG}
 echo "Archiving current Indexes: cp $embossdbindexdir/*.* $old_indexdir/" |tee -a ${LOG} 
-cp $embossdbindexdir/*.* $old_indexdir/
+mv $embossdbindexdir/*.* $old_indexdir/
 
 date | tee -a ${LOG}
 echo "Indexing $embossdb" |tee -a ${LOG}
