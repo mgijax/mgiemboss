@@ -57,8 +57,10 @@ if [ "$release" = "$last_update" ]
 then
   echo "No update needed the last download date $release matches what's in db $last_update " |  tee -a ${LOG}
   echo "Program complete"
-  exit
+  #exit without failure
+  exit 0
 fi
+echo "Update needed - new release detected: $release"
 #
 # set up dir structure 
 #
