@@ -53,9 +53,6 @@ If any of the above has changed, update the Configuration/update scripts as need
     indexSprot.sh	
     indexTrEMBL.sh
    
-    indexVegaMus_cdna.sh
-    indexVegaMus_prot.sh
-    
     indexEnsemblMus_cdna.sh
     indexEnsemblMus_prot.sh
     
@@ -88,10 +85,8 @@ EMBOSS updates are scheduled on the production instance of Jenkins.
 
 ### On demand
 
-5. indexVegaMus_prot.sh     - to run Vega protein 
-6. indexVegaMus_cdna.sh     - to run Vega cdna and ncrna
-7. indexEnsemblMus_cdna.sh  - to run Ensembl cdna and ncrna
-8. indexEnsemblMus_prot.sh  - to run Ensembl protein
+5. indexEnsemblMus_cdna.sh  - to run Ensembl cdna and ncrna
+6. indexEnsemblMus_prot.sh  - to run Ensembl protein
 
 
 ## Related TRs:

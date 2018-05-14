@@ -5,9 +5,6 @@
 # from /data/downloads/ensembl_mus_cdna 
 # or /data/downloads/ensembl_mus_protein
 # or /data/downloads/ensembl_mus_ncrna
-# or /data/downloads/vega_mus_ncrna
-# or /data/downloads/vega_mus_cdna
-# or /data/downloads/vega_mus_protein
 #
 # untars,and generates emboss indexes 
 #
@@ -15,11 +12,8 @@
 # 1. ensembl cdna file name has the format: Mus_musculus.$current_mouse.cdna.all.fa.gz
 # 2. ensembl ncrna file name has the format: Mus_musculus.$current_mouse.ncrna.fa.gz
 # 3. ensembl protein file name has the format: Mus_musculus.$current_mouse.pep.all.fa.gz
-# 4. VEGA cdna file name has the format: Mus_musculus.VEGA$release.cdna.all.fa.gz
-# 5. VEGA ncrna file name has the format: Mus_musculus.VEGA$release.ncrna.fa.gz
-# 6. VEGA protein file name has the format: Mus_musculus.VEGA$release.pep.all.fa.gz
 #
-# This script is called by the update[Ensembl|Vega]_* scripts
+# This script is called by the update[Ensembl scripts
 #
 cd `dirname $0`; 
 
