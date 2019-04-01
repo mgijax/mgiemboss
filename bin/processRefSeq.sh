@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+# processRefSeq.sh
+#
 # This script is called by either updateRefSeq_rna.sh or updateRefSeq_prot.sh
 # scripts to index refSeq sequences in to EMBOSS 
 #

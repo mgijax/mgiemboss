@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+# configRefSeq_prot.sh
+#
 # This script is a wrapper that sets
 # RefsSeq protein  configuration variables 
 # before calling the script that

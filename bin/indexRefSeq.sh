@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+# indexRefSeq.sh
+#
 # This script is a wrapper that calls
 # scripts to run refseq rna and refseq protein 
 # datasets update

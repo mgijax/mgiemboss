@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+# configRefSeq_rna.sh
+#
 # This script is a wrapper that sets
 # RefsSeq rna  configuration variables 
 # before calling the script that
