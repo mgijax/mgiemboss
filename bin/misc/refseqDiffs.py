@@ -1,5 +1,7 @@
 #!/usr/bin/python
-
+#
+# refseqDiffs.py
+#
 import os
 import string
 

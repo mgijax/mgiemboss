@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# zcatRefseq.sh 
+#
 # Version 2 12/7/2009
 # sc - updated 01/07/2013
 # sc - updated 09/10/2013
