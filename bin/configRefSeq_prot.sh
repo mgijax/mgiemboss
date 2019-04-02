@@ -11,7 +11,6 @@ cd `dirname $0`; . ../Configuration
 is_rna=0
 
 refseq_sourcedir=$remotedatadir/refseq/complete
-refseq_filePrefix=complete
 refseq_dbbasedir=$dbdir/refseq
 refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
 refseq_update_script=$scriptdir/processRefSeq.sh
@@ -40,14 +39,13 @@ sourcedir=$refseq_sourcedir
 
 # configuration specific to emboss tool
 embossdb=refseqProt
-filePrefix=$refseq_filePrefix
 fileSufix=protein.gpff
-embossfile=$filePrefix*.$fileSufix
+embossfile=$refseq_filePrefix*.$fileSufix
 embossfileformat=$refseq_embossfileformat
 
 db_basedir=$embossdbdir
 
-export sourcedir embossdb embossfile filePrefix fileSufix
+export sourcedir embossdb embossfile fileSufix
 export embossfileformat db_basedir
 
 SCRIPT_NAME=`basename $0`
@@ -78,7 +76,7 @@ echo "sourcedir=$sourcedir" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
 echo "embossdb=$embossdb" | tee -a ${LOG}
 echo "embossfile=$embossfile" | tee -a ${LOG}
-echo "filePrefix=$filePrefix" | tee -a ${LOG}
+echo "refseq_filePrefix=$refseq_filePrefix" | tee -a ${LOG}
 echo "fileSufix=$fileSufix" | tee -a ${LOG}
 echo "db_basedir=$db_basedir" | tee -a ${LOG}
 echo "embossfileformat=$embossfileformat" | tee -a ${LOG}
