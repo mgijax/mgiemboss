@@ -144,12 +144,12 @@ trembl_embosscomment="TrEMBL w/ EMBL index,release"
 #RefSeq 
 #
 refseq_release_file=$remotedatadir/refseq/release/RELEASE_NUMBER
-refseq_sourcedir=$remotedatadir/refseq/release/complete
+refseq_sourcedir=$remotedatadir/refseq/release/vertebrate_mammalian
 
 refseq_dbbasedir=$dbdir/refseq
 refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
 
-refseq_filePrefix=complete
+refseq_filePrefix=vertebrate_mammalian
 refseq_rna_fileSufix=.rna.gbff
 refseq_contig_fileSufix=.genomic.gbff
 refseq_protein_fileSufix=.protein.gbff
