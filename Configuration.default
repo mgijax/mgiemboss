@@ -45,24 +45,20 @@ zcatRefSeqScript=$scriptdir/misc/zcatRefseq.sh
 
 #path to zcat 
 zcatprog=/usr/bin/zcat
-#zcatprog=`which zcat`
+
 #path to zgrep
 zgrep=/usr/bin/zgrep
-#zgrep=` which zgrep`
 
 #perl path
 perlpath=/usr/bin/perl
-#perlpath=`which perl`
 
 #path to dbiflat program 
 dbflat=/usr/local/bin/dbiflat
-#dbflat=`which dbiflat`
+
 dbxlat=/usr/local/bin/dbxflat
-#dbxlat=`which dbxflat`
 
 #path to dbifasta program
 dbfasta=/usr/local/bin/dbifasta
-#dbfasta=`which dbifasta`
 
 #path to taxonomy list used to filter trembl dataset
 taxonfile=$dbdir/taxonomy.txt
