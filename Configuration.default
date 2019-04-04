@@ -140,7 +140,7 @@ trembl_embosscomment="TrEMBL w/ EMBL index,release"
 #RefSeq 
 #
 refseq_release_file=$remotedatadir/refseq/release/RELEASE_NUMBER
-refseq_sourcedir=$remotedatadir/refseq/release/vertebrate_mammalian
+refseq_sourcedir="$remotedatadir/refseq/release/vertebrate_mammalian $remotedatadir/refseq/release/vertebrate_other"
 
 refseq_dbbasedir=$dbdir/refseq
 refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
