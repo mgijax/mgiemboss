@@ -10,7 +10,6 @@
 cd `dirname $0`; . ../Configuration
 is_rna=0
 
-refseq_sourcedir=$remotedatadir/refseq/complete
 refseq_dbbasedir=$dbdir/refseq
 refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
 refseq_update_script=$scriptdir/processRefSeq.sh
