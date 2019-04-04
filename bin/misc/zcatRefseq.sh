@@ -2,6 +2,8 @@
 #
 # zcatRefseq.sh 
 #
+# sc - updated to process multi source dirs
+#
 # Version 2 12/7/2009
 # sc - updated 01/07/2013
 # sc - updated 09/10/2013
@@ -13,50 +15,46 @@
 #
 # It took about 3 hours to run
 # 
-datadir=$sourcedir
-destination=$temp_dir
 
-
-if [ ! -d $destination ]
+if [ ! -d $temp_dir ]
 then
-    echo "Creating $destination"
-    mkdir  $destination
+    echo "Creating $temp_dir"
+    mkdir  $temp_dir
+else
+    echo "Removing files from $term_dir"
+    rm $temp_dir/*
 fi
 
 echo "start: " `date`
-echo "Data directory: " $datadir
-echo "Destination directory: " $destination
+echo "Data directories: " $sourcedir
+echo "Destination directory: " $temp_dir
 
-cd $datadir
-echo "File Count in $datadir:"
-ls -l *.gz | wc -l
+for dir in $sourcedir:
+    cd $dir
+    echo "File Count in $dir:"
+    ls -l *.gz | wc -l
 
-for file_group in $REMOTE_FILES
-do
-   echo "File count for $file_group:"
-   ls -l *$file_group.gz | wc -l
-   echo "Removing temp files"
-   if ! find $destination -maxdepth 0 -empty | read
-   then
-      echo "rm $destination/*$file_group"
-      rm $destination/*$file_group
-   fi
-   for file in `ls -f *$file_group.gz |sed s/.gz//`
-   do
-	if [ -f $destination/$file ] 
-	then
-		echo "already expanded:" $file
-	else
- 		echo "Expanding this file: " $file
-                #set the release number if not set
-		# sc - strip out lines  beginning with 'PROJECT' and 'DBLINK'
-		$zcatprog ${file}.gz  | sed -e '/^PROJECT/d' | sed -e '/^DBLINK/d' > $destination/${file}
-	fi
+    for file_group in $REMOTE_FILES
+    do
+       echo "File count for $file_group:"
+       ls -l $dir/*$file_group.gz | wc -l
+       for file in `ls -f *$file_group.gz |sed s/.gz//`
+       do
+	    if [ -f $temp_dir/$file ] 
+	    then
+		    echo "already expanded:" $file
+	    else
+		    echo "Expanding this file: " $file
+		    #set the release number if not set
+		    # sc - strip out lines  beginning with 'PROJECT' and 'DBLINK'
+		    $zcatprog ${file}.gz  | sed -e '/^PROJECT/d' | sed -e '/^DBLINK/d' > $temp_dir/${file}
+	    fi
 
+	done
     done
 done
 
 echo 'File Count:'
-ls -l $destination/ | wc -l
+ls -l $temp_dir/ | wc -l
 
 echo "end: " `date`
