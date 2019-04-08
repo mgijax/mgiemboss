@@ -14,8 +14,8 @@ BEGIN {
   #default chunk size is  1.5 GB
   chunksize=1610612736
   partno = 1
-  filename="/data/databases/sprot_test/temp/sprot"
-  outdir="/data/databases/sprot_test/temp"
+  filename="/data/databases/sprot/temp/sprot"
+  outdir="/data/databases/sprot/temp"
   sufix="flat"
   blockStart="ID"
   blockEnd="//"
