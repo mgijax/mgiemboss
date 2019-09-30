@@ -10,8 +10,8 @@
 #
 # lnh - updated 11/05/2014
 #
-# This script is called from the updateGenbank.sh script
-# Asumption - all the global variables have already been set
+# This script is called from the updateRefSeq.sh script
+# Assumption - all the global variables have already been set
 #
 # It took about 3 hours to run
 # 
@@ -21,15 +21,17 @@ then
     echo "Creating $temp_dir"
     mkdir  $temp_dir
 else
-    echo "Removing files from $term_dir"
+    echo "Removing files from $temp_dir"
     rm $temp_dir/*
 fi
 
 echo "start: " `date`
-echo "Data directories: " $sourcedir
+echo "Data directories: " $refseq_source_mammalian_dir $refseq_source_other_dir
 echo "Destination directory: " $temp_dir
 
-for dir in $sourcedir:
+for dir in $refseq_source_mammalian_dir $refseq_source_other_dir
+do
+    echo "dir: " $dir
     cd $dir
     echo "File Count in $dir:"
     ls -l *.gz | wc -l
@@ -38,12 +40,16 @@ for dir in $sourcedir:
     do
        echo "File count for $file_group:"
        ls -l $dir/*$file_group.gz | wc -l
+
        for file in `ls -f *$file_group.gz |sed s/.gz//`
        do
+	    echo "file: $file"
 	    if [ -f $temp_dir/$file ] 
 	    then
 		    echo "already expanded:" $file
 	    else
+		    # check the file size and split if necessary:
+		
 		    echo "Expanding this file: " $file
 		    #set the release number if not set
 		    # sc - strip out lines  beginning with 'PROJECT' and 'DBLINK'
