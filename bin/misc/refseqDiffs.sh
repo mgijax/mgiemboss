@@ -19,7 +19,7 @@ export DATA_SET
 #
 
 # old and new index directories 
-REFSEQ_DIR=$db_basedir
+REFSEQ_DIR=$embossdbdir
 NEW_RNA_INDEX_DIR=${REFSEQ_DIR}/refseqRnaIdx
 OLD_RNA_INDEX_DIR=${NEW_RNA_INDEX_DIR}/old
 NEW_PROT_INDEX_DIR=${REFSEQ_DIR}/refseqProtIdx
