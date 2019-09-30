@@ -1,4 +1,24 @@
+#!/bin/sh
+
+#
+# Program: Configuration.default
+#
+#
+#  If the MGICONFIG environment variable does not have a local override,
+#  use the default "live" settings.
+#
+if [ "${MGICONFIG}" = "" ]
+then
+    MGICONFIG=/usr/local/mgi/live/mgiconfig
+    export MGICONFIG
+fi
+
+. ${MGICONFIG}/master.config.sh
+
 emboss_server=bhmgiem01.jax.org
+
+export emboss_server
+
 #
 # Webservice Soaplab2 setting
 #
@@ -7,24 +27,40 @@ soaplab2_build_dir=/data/services/soaplab2
 soaplab2_logs_dir=/usr/local/tomcat/logs
 soaplab2_deploy_dir=/usr/local/tomcat/soaplab2
 
+export soaplab2_tempfiles_dir soaplab2_build_dir
+export soaplab2_logs_dir soaplab2_deploy_dir
+
 #
 # emboss datasets global configuration 
 #
-#
+
 # where to read original ftp data - mapped on hobbiton
 remotedatadir=/mgi-data
+
+export remotedatadir
+
 # where to process data locally on bhmgiem01 
 localdatadir=/data
 current_mouse=GRCm38
+
+export localdatadir current_mouse
+
 #
 #Base directory for datasets - every dataset is a subdirectory
 #
+
 dbdir=$localdatadir/databases
+
+export dbdir
+
 #
 #Base directory for runs logs 
 #
 logdir=$dbdir/dbilogs
 
+export logdir
+
+#
 #Scripts directories
 #
 scripts_base=$dbdir/mgiemboss
@@ -32,16 +68,25 @@ scriptdir=$scripts_base/bin
 
 #script to filter tageted taxonomies
 filtertrembl=$scriptdir/misc/filterTrembl.py
+
+
 #script to re format sequence header line
 format_header=$scriptdir/misc/formatFastaHeader.pl
+
 #script to unzip genbank files
 zcatGBScript=$scriptdir/misc/zcatGB.sh
+
 #script to test genbank update
 genbankDiffs=$scriptdir/misc/genbankDiffs.sh
+
 #script to test refSeq update
 refSeqDiffs=$scriptdir/misc/refseqDiffs.sh
+
 #script to unzip genbank files
 zcatRefSeqScript=$scriptdir/misc/zcatRefseq.sh
+
+export scripts_base scriptdir filtertrembl format_header zcatGBScript
+export genbankDiffs refSeqDiffs zcatRefSeqScript
 
 #path to zcat 
 zcatprog=/usr/bin/zcat
@@ -52,10 +97,13 @@ zgrep=/usr/bin/zgrep
 #perl path
 perlpath=/usr/bin/perl
 
+export zcatprog zgrep perlpath
+
 #path to dbiflat program 
 dbflat=/usr/local/bin/dbiflat
 
-dbxlat=/usr/local/bin/dbxflat
+# for refseq only
+dbxflat=/usr/local/bin/dbxflat
 
 #path to dbifasta program
 dbfasta=/usr/local/bin/dbifasta
@@ -63,12 +111,17 @@ dbfasta=/usr/local/bin/dbifasta
 #path to taxonomy list used to filter trembl dataset
 taxonfile=$dbdir/taxonomy.txt
 
+export dbflat dbxflat dbfasta taxonfile
+
 #documentation : http://emboss.sourceforge.net/apps/cvs/emboss/apps/dbiflat.html
 #path to emboss config file
 
 embossconfig=/usr/local/emboss/share/EMBOSS/emboss.default
 moddate_prefix=moddate
 updateConfigScript=$scriptdir/misc/updateEmbossConfig.pl
+
+export embossconfig moddate_prefix updateConfigScript
+
 #
 ######################### Datasets specific configs #########################
 #
@@ -86,9 +139,13 @@ sprot_startBlock=ID
 sprot_endblock=//
 sprot_chunkSize=1610612736
 
+export sprot_startBlock sprot_endblock sprot_chunkSize
+
 # Configuration specific to ftp directory
 sprot_sourcedir=$remotedatadir/uniprot/swissprot
 sprot_sourcefilename=uniprot_sprot.dat.gz
+
+export sprot_sourcedir sprot_sourcefilename
 
 # configuration specific to emboss tool
 sprot_embossdbtype=P
@@ -103,18 +160,21 @@ sprot_embossfileformat=swiss
 sprot_embossfields=""
 sprot_embosscomment="Swiss Prot w/ EMBL index"
 
+export sprot_embossdbtype sprot_embossdb sprot_fileSufix
+export sprot_filePrefix sprot_embossdbdir sprot_embossdbindexdir
+export sprot_embossfile sprot_embossmethod sprot_embossfileformat
+export sprot_embossfields sprot_embosscomment
+
 ####
 #
 #Uniprot - Trembl
-# Weekly mirror_wget cron (Sat @ 5:00 PM).
-#
-#0 17 * * 6 /usr/local/mgi/live/mirror_wget/weeklycron.csh; /usr/local/mgi/live/mirror_wget/check_mirror_logs.csh
-#Is The cron that downloads uniprot_trembl.dat.gz file on hobbiton. THE script runs
-# on mgi-prodapp2 
 #  
 # configuration specific to file split program
 trembl_startBlock=ID
 trembl_endblock=//
+
+export trembl_startBlock trembl_endblock
+
 # Chunks of 2.5GB
 #trembl_chunkSize=2684354560
 trembl_chunkSize=1610612736
@@ -122,6 +182,8 @@ trembl_chunkSize=1610612736
 # Configuration specific to ftp directory
 trembl_sourcedir=$remotedatadir/uniprot/trembl
 trembl_sourcefilename=uniprot_trembl.dat.gz
+
+export trembl_chunkSize trembl_sourcedir trembl_sourcefilename
 
 # configuration specific to emboss tool
 trembl_embossdbtype=P
@@ -137,23 +199,21 @@ trembl_embossfileformat=swiss
 trembl_embossfields=""
 trembl_embosscomment="TrEMBL w/ EMBL index,release"
 
+export trembl_embossdbtype trembl_embossdb tr_embossdb trembl_fileSufix
+export trembl_filePrefix trembl_embossdbdir trembl_embossdbindexdir
+export trembl_embossfile trembl_embossmethod trembl_embossfileformat
+export trembl_embossfields trembl_embosscomment
+
 #RefSeq 
 #
 refseq_release_file=$remotedatadir/refseq/release/RELEASE_NUMBER
-refseq_sourcedir="$remotedatadir/refseq/release/vertebrate_mammalian $remotedatadir/refseq/release/vertebrate_other"
-
 refseq_dbbasedir=$dbdir/refseq
 refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
 
-refseq_filePrefix=vertebrate_mammalian
-refseq_rna_fileSufix=.rna.gbff
-refseq_contig_fileSufix=.genomic.gbff
-refseq_protein_fileSufix=.protein.gbff
+export refseq_release_file refseq_dbbasedir refseq_flatfiles_basedir
 
-refseq_rna_file_pattern="$refseq_filePrefix.*$refseq_rna_fileSufix"
-refseq_contig_file_pattern="$refseq_filePrefix.*$refseq_contig_fileSufix"
-refseq_protein_file_pattern="$refseq_filePrefix.*$refseq_protein_fileSufix"
+# used by zcatRefSeq.sh
+refseq_source_mammalian_dir="$remotedatadir/refseq/release/vertebrate_mammalian"
+refseq_source_other_dir="$remotedatadir/refseq/release/vertebrate_other"
 
-refseq_rna_file="$refseq_sourcedir/$refseq_rna_file_pattern $refseq_sourcedir/$refseq_contig_file_pattern"
-refseq_protein_file="$refseq_sourcedir/$refseq_protein_file_pattern"
-
+export refseq_source_mammalian_dir refseq_source_other_dir
