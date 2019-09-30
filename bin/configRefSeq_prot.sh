@@ -7,53 +7,51 @@
 # before calling the script that
 # generates emboss indexes 
 #
+# HISTORY
+#
+#       04/04/19 - sc
+#               - updated to factor out over configuration and process files
+#               - from multiple directories
+
 cd `dirname $0`; . ../Configuration
-is_rna=0
 
-refseq_dbbasedir=$dbdir/refseq
-refseq_flatfiles_basedir=$refseq_dbbasedir/flatfiles
-refseq_update_script=$scriptdir/processRefSeq.sh
+# used by processRefSeq.sh
 refseq_embossfileformat=GB
+export refseq_embossfileformat
 
-release_file=$refseq_release_file
+# refseq file pattern
+refseq_file_pattern=vertebrate_*.gpff
+export refseq_file_pattern
 
-updateScript=$refseq_update_script
-REMOTE_FILES="protein.gpff"
 
 #where the flatfiles and indexes are located on the EMBOSS server
-embossdbdir=$refseq_dbbasedir
-flatfiles_dir=$embossdbdir/flatfiles
 temp_dir=$embossdbdir/temp
 old_dir=$embossdbdir/flatfiles.old
 embossdbindexdir=$embossdbdir/refseqProtIdx
 temp_indexdir=$embossdbindexdir/tempIdx
 old_indexdir=$embossdbindexdir/old
+REMOTE_FILES="protein.gpff"
 
-export is_rna updateConfigScript flatfiles_dir 
-export embossdbdir temp_dir old_dir embossdbindexdir temp_indexdir
-export old_indexdir release_file REMOTE_FILES
-
-#Where to get the files on hobbiton 
-sourcedir=$refseq_sourcedir
+export temp_dir old_dir embossdbindexdir temp_indexdir
+export old_indexdir REMOTE_FILES
 
 # configuration specific to emboss tool
-embossdb=refseqProt
-fileSufix=protein.gpff
-embossfile=$refseq_filePrefix*.$fileSufix
-embossfileformat=$refseq_embossfileformat
+#embossdb=refseqProt
+# change to lower case for dbxflat
+embossdb=refseqprot
 
-db_basedir=$embossdbdir
-
-export sourcedir embossdb embossfile fileSufix
-export embossfileformat db_basedir
+export embossdb
 
 SCRIPT_NAME=`basename $0`
 dblogfile=$embossdb.log
-LOG_DIR=$logdir
 logfile=$embossdb$moddate_prefix.log
-last_updatefile=${LOG_DIR}/$logfile
+last_updatefile=$logdir/$logfile
 
-LOG=${LOG_DIR}/${SCRIPT_NAME}.log
+export dblogfile last_updatefile
+
+LOG=$logdir/${SCRIPT_NAME}.log
+export LOG
+
 rm -f ${LOG}
 touch ${LOG}
 echo "Running $0" | tee -a ${LOG}
@@ -62,10 +60,8 @@ date | tee -a ${LOG}
 echo "" | tee -a ${LOG}
 echo "Global variables setting" | tee -a ${LOG}
 echo "------------------------" | tee -a ${LOG}
-echo "is_rna=$is_rna" | tee -a ${LOG}
 echo "updateConfigScript=$updateConfigScript" | tee -a ${LOG}
 echo "embossdbdir=$embossdbdir" | tee -a ${LOG}
-echo "flatfiles_dir=$flatfiles_dir" | tee -a ${LOG}
 echo "temp_dir=$temp_dir" | tee -a ${LOG}
 echo "old_dir=$old_dir" | tee -a ${LOG}
 echo "embossdbindexdir=$embossdbindexdir" | tee -a ${LOG}
@@ -73,12 +69,8 @@ echo "temp_indexdir=$temp_indexdir" | tee -a ${LOG}
 echo "old_indexdir=$old_indexdir" | tee -a ${LOG}
 echo "sourcedir=$sourcedir" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
-echo "embossdb=$embossdb" | tee -a ${LOG}
-echo "embossfile=$embossfile" | tee -a ${LOG}
 echo "refseq_filePrefix=$refseq_filePrefix" | tee -a ${LOG}
-echo "fileSufix=$fileSufix" | tee -a ${LOG}
-echo "db_basedir=$db_basedir" | tee -a ${LOG}
-echo "embossfileformat=$embossfileformat" | tee -a ${LOG}
+echo "embossfileformat=$refseq_embossfileformat" | tee -a ${LOG}
 echo "embossconfig=$embossconfig" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
 
@@ -95,8 +87,10 @@ echo "dbflat=$dbflat" | tee -a ${LOG}
 echo "scriptdir=$scriptdir" | tee -a ${LOG}
 echo "------------------------" | tee -a ${LOG}
 echo "" | tee -a ${LOG}
+
 date | tee -a ${LOG}
-$updateScript
+$scriptdir/processRefSeq.sh
+
 #
 #To Do
 # Check the logs for errors
